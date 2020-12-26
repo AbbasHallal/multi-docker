@@ -5,23 +5,23 @@ services:
   - docker
 
 before_install:
-  - docker build -t abbas/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t absh12/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run -e CI=true abbas/react-test npm test
+  - docker run -e CI=true absh12/react-test npm test
 
 after_success:
-  - docker build -t abbas/multi-client ./client
-  - docker build -t abbas/multi-nginx ./nginx
-  - docker build -t abbas/multi-server ./server
-  - docker build -t abbas/multi-worker ./worker
+  - docker build -t absh12/multi-client ./client
+  - docker build -t absh12/multi-nginx ./nginx
+  - docker build -t absh12/multi-server ./server
+  - docker build -t absh12/multi-worker ./worker
   # Log in to the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # Take those images and push them to docker hub
-  - docker push abbas/multi-client
-  - docker push abbas/multi-nginx
-  - docker push abbas/multi-server
-  - docker push abbas/multi-worker
+  - docker push absh12/multi-client
+  - docker push absh12/multi-nginx
+  - docker push absh12/multi-server
+  - docker push absh12/multi-worker
 
 deploy:
   provider: elasticbeanstalk
